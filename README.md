@@ -82,7 +82,7 @@ The results of the matches after interaction will be available in the `Simulator
 
 A similarly named `.txt` file can also be found; this file records the executions of the executables, and errors with it if any (for instance executable not found or execution error).
 
-To assist you while building the bots, the specific interacting files (`MAP.INP`, `MOVE.OUT`, `STATE.DAT`) for every player on each turn of the matches are also stored. You can access them in the folder `Simulator/Match/Players`.
+To assist you while building the bots, the specific interacting files (`MAP.INP`, `MOVE.OUT`, `STATE.DAT`) for every player on each turn of the matches are also stored. You can access them in the folder `Simulator/Match/Players`. On how to use them, please refer to the source code in the `Source` folder.
 
 ## Bug report
 
