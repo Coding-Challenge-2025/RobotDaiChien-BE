@@ -68,7 +68,6 @@ def main():
                 if (p < 0):
                     continue
                 extenstion = fileName[p + 1:]
-                #print(extenstion)
                 
                 if not (extenstion in ["dll", "exe", "py"]):
                     try:
@@ -119,7 +118,10 @@ def main():
                 if os.path.exists(f'./Players/{names_of_teams[i]}/main.py'):
                     command = f'python main.py > log.txt'
                 elif os.path.exists(f'./Players/{names_of_teams[i]}/main.exe'):
-                    command = f'./main.exe > log.txt'
+                    if os.name == 'nt':
+                        command = f'main.exe > log.txt'
+                    elif os.name == 'posix':
+                        command = f'./main.exe > log.txt'                   
                 else:
                     raise Exception(f'[{names_of_teams[i]}][ERROR] No executable file found.')
                 command = command.split()
@@ -130,13 +132,13 @@ def main():
                 textLog.append(f"Error is encountered | {names_of_teams[i]}\n")
                 textLog.append(f"{str(e)}\n")
                 #exit(0)
-                PROC_NAME = [f"main.exe", 'procgov64.exe', 'main']
+                # PROC_NAME = [f"main.exe", 'procgov64.exe', 'main']
 
-                for proc in psutil.process_iter():
-                    # check whether the process to kill name matches
-                    #print(proc.name())
-                    if proc.name() in PROC_NAME:
-                        proc.kill()
+                # for proc in psutil.process_iter():
+                #     # check whether the process to kill name matches
+                #     #print(proc.name())
+                #     if proc.name() in PROC_NAME:
+                #         proc.kill()
                         #pass
         
         outputs = fileInterator.readOutputFilesOfPlayers(names_of_teams)
