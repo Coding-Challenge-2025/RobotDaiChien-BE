@@ -119,9 +119,7 @@ def main():
                 if os.path.exists(f'./Players/{names_of_teams[i]}/main.py'):
                     command = f'python main.py > log.txt'
                 elif os.path.exists(f'./Players/{names_of_teams[i]}/main.exe'):
-                    command = f'main.exe > log.txt'
-                elif os.path.exists(f'./Players/{names_of_teams[i]}/main'):
-                    command = f'./main > log.txt'
+                    command = f'./main.exe > log.txt'
                 else:
                     raise Exception(f'[{names_of_teams[i]}][ERROR] No executable file found.')
                 command = command.split()
@@ -132,7 +130,7 @@ def main():
                 textLog.append(f"Error is encountered | {names_of_teams[i]}\n")
                 textLog.append(f"{str(e)}\n")
                 #exit(0)
-                PROC_NAME = [f"main.exe", 'procgov64.exe']
+                PROC_NAME = [f"main.exe", 'procgov64.exe', 'main']
 
                 for proc in psutil.process_iter():
                     # check whether the process to kill name matches
