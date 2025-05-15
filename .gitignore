@@ -2,6 +2,7 @@
 .vscode
 Simulator/Match/*
 !Simulator/Match/Players
+Simulator/Match/Players/*
 Simulator/Players/*
 Simulator/__pycache__/
 *.exe

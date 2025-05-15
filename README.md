@@ -67,6 +67,14 @@ bash run.sh <map file> <bot 1> <bot 2> <...>
 
 With `<bot 1>`, `<bot 2>`,... being the bot names (folder names) and `<map name>` being the map file. Up to *4 bots* can be run at once during a match.
 
+Example command for running 2 bots on Windows:
+```ps
+./run.bat .\Simulator\Map\blank.txt bot1 bot2
+```
+> [!NOTE]
+> The map file `.\Simulator\Map\blank.txt` is already included in the repository. You have to compile the bot and put it in the folder `.\Simulator\Players\<bot name>\main.exe` before running the command. The example code for 2 bots is included in `\Source\`.
+
+
 ### After the matches
 
 The results of the matches after interaction will be available in the `Simulator/Match` folder with the name of `<map name>_<bot 1>_<bot 2>.json`. The file stores the states of the game on each turn throughout the match.
