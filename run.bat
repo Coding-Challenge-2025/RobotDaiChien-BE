@@ -1,0 +1,1 @@
+pushd Simulator && python main.py %1 -p %2 %3 %4 %5 && popd

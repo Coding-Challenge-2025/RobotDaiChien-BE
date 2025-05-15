@@ -1,63 +1,80 @@
-## Installation
+# Coding Challenge 2025 - Robot đại chiến
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install. Highly recommend using python package manager like [conda](https://docs.conda.io/en/latest/)
+This is the repository of the interactor (also called the backend or the judge) of the game "Robot đại chiến", used to run the matches between the bots.
 
-Tested on python 3.12
+## Requirements
 
-(optional for conda user)
+The judge is written in Python, with several packages used. To begin with, you need to have Python installed on your machine, specifically [Python 3.11](https://www.python.org/downloads/release/python-3110/) or higher.
+
+You should also have a package manager to insall said dependencies for the interactor. The most commonly used one is [pip](https://pip.pypa.io/en/stable/); an alternative like [conda](https://docs.conda.io/en/latest/) can also be used (and recommended).
+
+If you're a conda user, run this script beforehand.
 
 ```bash
 conda create -n CodingChallenge2025 python=3.12
 conda activate CodingChallenge2025
 ```
 
-install all requirements
+Now with a package manager available, install the necessary requirements.
 
 ```bash
 pip install -r requirements.txt
 ```
-## Data Folder Structure
-
-
-Your projects structure should look like this
-
-```
-tree -L 2 -l .
-
-.
-├── README.md
-├── requirements.txt
-├── .gitignore
-├── Simulator
-│   ├── board.py
-│   ├── FileInteractor.py
-│   ├── JSONlogger.py
-│   ├── listOfPlayers.py
-│   ├── main.py
-│   ├── Map
-│   ├── Match
-│   ├── player.py
-│   ├── Players
-│   └── powerUp.py
-└── Source
-    ├── bot1
-    └── bot2
-
-```
 
 ## Usage
 
-Folder [Source](Source) is where you create your bot, including source code and executable. To use your bot, you must create a folder with your bot name inside [Players](Simulator/Players) and move your executable file there.
+If cloned correctly, your folder structure should look like this:
 
-To run the simulator, follow this template command line
-```bash
-cd Simulator && python main.py map_name -p bot_1 bot_2
+```
+.
+├── Simulator
+│   ├── Map
+│   ├── Match
+│   └── Players
+└── Source
 ```
 
-Folder [Match](Match) will include all .json file. Inside there is also a folder called [Players](Simulator/Match/Players/) that will record MAP.INP, MOVE.OUT, STATE.DAT of each turn. These files will help you understand more about your bot decision in MOVE.OUT according to MAP.INP.
+### Run the matches
 
-Folder [Map](Map) will contain all map. We provide you a blank map for example. You can create your custom map to test your bot here
+First create a *folder* of your bot's name in `Simulator/Players` and put your executable file in it. Your executable must be named `main.exe`.
+
+Besides the executable the folder **should not** have any other files, as these files **will be deleted** during the interaction. The directory should then look like this:
+
+```
+.
+├── Simulator
+│   ├── Map
+│   ├── Match
+│   └── Players
+│       └── mybot
+│           └── main.exe
+└── Source
+```
+
+Maps that are to be used in the matches should also be included, specifically in the folder `Simulator/Map`. An example `blank.txt` map has been given to you in the directory.
+
+To start interacting, run the `run.bat` file in the following manner:
+
+```
+./run.bat <map file> <bot 1> <bot 2> <...>
+```
+
+Or if you're using Linux, run the `run.sh` file instead:
+
+```bash
+bash run.sh <map file> <bot 1> <bot 2> <...>
+```
+
+With `<bot 1>`, `<bot 2>`,... being the bot names (folder names) and `<map name>` being the map file. Up to *4 bots* can be run at once during a match.
+
+### After the matches
+
+The results of the matches after interaction will be available in the `Simulator/Match` folder with the name of `<map name>_<bot 1>_<bot 2>.json`. The file stores the states of the game on each turn throughout the match.
+
+A similarly named `.txt` file can also be found; this file records the executions of the executables, and errors with it if any (for instance executable not found or execution error).
+
+To assist you while building the bots, the specific interacting files (`MAP.INP`, `MOVE.OUT`, `STATE.DAT`) for every player on each turn of the matches are also stored. You can access them in the folder `Simulator/Match/Players`.
 
 ## Bug report
 
-For bug reporting, you could report at the mail that send you this github link. Attach to it the .json file, the bot folder in [Players](Simulator/Match/Players/)
+Should any bug happen, report us through the organizer's official email (the one which mailed you this repo). Attach to it the match's `.json` file and state folders of the bot in `Simulator/Match/Players/`.
