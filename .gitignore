@@ -5,6 +5,7 @@ Simulator/Match/*
 Simulator/Match/Players/*
 Simulator/Players/*
 Simulator/__pycache__/
+Source/*
 *.exe
 
 # Byte-compiled / optimized / DLL files
