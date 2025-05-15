@@ -36,7 +36,7 @@ If cloned correctly, your folder structure should look like this:
 
 ### Run the matches
 
-First create a *folder* of your bot's name in `Simulator/Players` and put your executable file in it. Your executable must be named `main.exe`.
+First create a *folder* of your bot's name in `Simulator/Players` and put your executable file in it. Your executable **must be named** `main.exe`**, regardless of your operating system**.
 
 Besides the executable the folder **should not** have any other files, as these files **will be deleted** during the interaction. The directory should then look like this:
 
@@ -65,14 +65,15 @@ Or if you're using Linux, run the `run.sh` file instead:
 bash run.sh <map file> <bot 1> <bot 2> <...>
 ```
 
-With `<bot 1>`, `<bot 2>`,... being the bot names (folder names) and `<map name>` being the map file. Up to *4 bots* can be run at once during a match.
+With `<bot 1>`, `<bot 2>`,... being the bot names (folder names) and `<map name>` being the map file. Only *2 or 4 bots* can be competing at the same time for a match interaction.
 
 Example command for running 2 bots on Windows:
 ```ps
 ./run.bat blank.txt bot1 bot2
 ```
+
 > [!NOTE]
-> The map file `.\Simulator\Map\blank.txt` is already included in the repository. You have to compile the bot and put it in the folder `.\Simulator\Players\<bot name>\main.exe` (or `.../main` in Linux) before running the command. The example code for 2 bots is included in `\Source\`.
+> The map file `.\Simulator\Map\blank.txt` is already included in the repository. You have to compile the bot and put it in the folder `.\Simulator\Players\<bot name>\main.exe` before running the command. The example code for 2 bots is included in `\Source\`.
 
 
 ### After the matches
