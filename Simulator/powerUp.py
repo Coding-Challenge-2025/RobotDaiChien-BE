@@ -1,4 +1,5 @@
 import random
+from collections import deque
 from listOfPlayers import *
 from Players import *
 
@@ -44,25 +45,67 @@ def addPowerUp(board, listOfPowerUps: list, timeout: int, listOfPlayers: ListOfP
     powerup_types = ['G', 'E', 'F']
     chosen_types = random.sample(powerup_types, 2)
     movable_cells = board.listMovableCells()
-    pos1 = listOfPlayers[0].getPosition()
-    pos2 = listOfPlayers[1].getPosition()
+    set_of_movable_cells = set(movable_cells)
+    if len(listOfPlayers) > 2:
+        for i in range(len(listOfPlayers)):
+            set_of_movable_cells.discard(listOfPlayers[i].getCurrentPosition())
+        
+        set_of_movable_cells = list(set_of_movable_cells)
+        for powerup_type in chosen_types:
+            if not set_of_movable_cells:
+                break
+            x, y = random.choice(set_of_movable_cells)
+            x, y = int(x), int(y)
+            if findPowerUp(x, y, listOfPowerUps) == None:
+                listOfPowerUps.append(PowerUp(x, y, powerup_type, timeout))
+                set_of_movable_cells.remove((x,y))
+        
+        return
+    pos1 = listOfPlayers[0].getCurrentPosition()
+    pos2 = listOfPlayers[1].getCurrentPosition()
+    set_of_movable_cells.discard(pos1)
+    set_of_movable_cells.discard(pos2)
 
+    near_equidistant_cells = set()
     for cell in movable_cells:
-            x1, y1 = pos1
-            x2, y2 = pos2
-            x_cell, y_cell = cell
-            dist_pos1_to_cell = abs(x1 - x_cell) + abs(y1 - y_cell)
-            dist_pos2_to_cell = abs(x2 - x_cell) + abs(y2 - y_cell)
-            if dist_pos1_to_cell != dist_pos2_to_cell:
-                movable_cells.remove(cell)
+            dist_pos1_to_cell = get_path_distance(pos1, cell, set_of_movable_cells)
+            dist_pos2_to_cell = get_path_distance(pos2, cell, set_of_movable_cells)
+            if dist_pos1_to_cell == dist_pos2_to_cell and dist_pos1_to_cell != float('inf') and min(dist_pos1_to_cell, dist_pos2_to_cell) >= 2:
+                near_equidistant_cells.add(cell)
+            elif abs(dist_pos1_to_cell - dist_pos2_to_cell) == 1 and min(dist_pos1_to_cell, dist_pos2_to_cell) >= 2:
+                near_equidistant_cells.add(cell)
 
+    near_equidistant_cells = list(near_equidistant_cells)
     for powerup_type in chosen_types:
-        if not movable_cells: # No more available cells
+        if not near_equidistant_cells: # No more available cells
             break
-        x, y = random.choice(movable_cells)
+        x, y = random.choice(near_equidistant_cells)
         x, y = int(x), int(y)
         if findPowerUp(x, y, listOfPowerUps) == None:
             listOfPowerUps.append(PowerUp(x, y, powerup_type, timeout))
-            movable_cells.remove((x,y))
+            near_equidistant_cells.remove((x,y))
         
-        
+def get_path_distance(start_pos: tuple, end_pos: tuple, set_of_all_movable_cells: set) -> float:
+    if start_pos == end_pos:
+        return 0
+    
+    if start_pos not in set_of_all_movable_cells or end_pos not in set_of_all_movable_cells:
+        return float('inf')
+
+    queue = deque([(start_pos, 0)])
+    visited = {start_pos}
+
+    while queue:
+        (current_x, current_y), dist = queue.popleft()
+
+        for dx, dy in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+            next_pos = (current_x + dx, current_y + dy)
+
+            if next_pos == end_pos:
+                return dist + 1
+
+            if next_pos in set_of_all_movable_cells and next_pos not in visited:
+                visited.add(next_pos)
+                queue.append((next_pos, dist + 1))
+    
+    return float('inf')
