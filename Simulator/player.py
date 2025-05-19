@@ -32,7 +32,6 @@ class Player:
     
     def getKilled(self) -> bool:
         self.alive = False
-        self.x = self.y = -1
         return self.alive
 
     def getPositionX(self) -> int:
@@ -48,6 +47,9 @@ class Player:
     def getPosition(self) -> list:
         if not self.alive:
             return (-1, -1)
+        return (self.x, self.y)
+    
+    def getCurrentPosition(self) -> list:
         return (self.x, self.y)
 
     def increaseArea(self, delta : int = 1) -> int:
