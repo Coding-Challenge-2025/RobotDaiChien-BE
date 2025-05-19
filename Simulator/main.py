@@ -326,7 +326,8 @@ def main():
                 if board.checkUnmovable(x, y):
                     listOfPlayers[i].getKilled()
 
-        if turn % frequency == 0 and turn < 3 * frequency:
+        rows, columns = board.getShape()
+        if turn % frequency == 0 and turn < (int)(min(rows, columns)/2 - 2) * frequency:
             addPowerUp(board, listOfPowerUps, frequency, listOfPlayers)
 
         turn += 1
