@@ -158,6 +158,10 @@ class Player:
                                  self.resetTangToc()
                             return (self.x, self.y)
             
+            # Invalid move after the turn using DauTron will result in player.getKill()
+            if board.getCell(nextX, nextY) == '#' and board.getCell(self.x, self.y) == '#':
+                self.getKilled()
+            
             # 2. Validate move distance (TangToc or normal)
             max_allowed_dist = 1
             is_valid_tangtoc_path = False
