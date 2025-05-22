@@ -63,8 +63,6 @@ def addPowerUp(board, listOfPowerUps: list, timeout: int, listOfPlayers: ListOfP
         return
     pos1 = listOfPlayers[0].getCurrentPosition()
     pos2 = listOfPlayers[1].getCurrentPosition()
-    set_of_movable_cells.discard(pos1)
-    set_of_movable_cells.discard(pos2)
 
     near_equidistant_cells = set()
     for cell in movable_cells:
@@ -87,7 +85,7 @@ def addPowerUp(board, listOfPowerUps: list, timeout: int, listOfPlayers: ListOfP
         
 def get_path_distance(start_pos: tuple, end_pos: tuple, set_of_all_movable_cells: set) -> float:
     if start_pos == end_pos:
-        return 0
+        return float('inf')
     
     if start_pos not in set_of_all_movable_cells or end_pos not in set_of_all_movable_cells:
         return float('inf')
