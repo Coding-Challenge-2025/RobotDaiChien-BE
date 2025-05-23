@@ -64,6 +64,16 @@ def main():
     for i in range(len(names_of_teams)):
         if os.path.exists(f"./Players/{names_of_teams[i]}/"):
             for fileName in os.listdir(f"./Players/{names_of_teams[i]}/"):
+
+                file_path = f"./Players/{names_of_teams[i]}/{fileName}"
+
+                if os.path.isdir(file_path):
+                    try:
+                        shutil.rmtree(file_path)
+                    except:
+                        pass
+                    continue
+                
                 p = fileName.rfind('.')
                 if (p < 0):
                     continue
