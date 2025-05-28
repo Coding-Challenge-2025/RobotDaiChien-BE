@@ -2,6 +2,8 @@
 
 This is the repository of the interactor (also called the backend or the judge) of the game "Robot đại chiến", used to run the matches between the bots.
 
+Frontend: [link](https://github.com/Coding-Challenge-2025/RobotDaiChien-FE.git)
+
 ## Requirements
 
 The judge is written in Python, with several packages used. To begin with, you need to have Python installed on your machine, specifically [Python 3.11](https://www.python.org/downloads/release/python-3110/) or higher.
@@ -87,3 +89,8 @@ To assist you while building the bots, the specific interacting files (`MAP.INP`
 ## Bug report
 
 Should any bug happen, report us through the organizer's official email (the one which mailed you this repo). Attach to it the match's `.json` file and state folders of the bot in `Simulator/Match/Players/`.
+
+## Notice for future development
+
+1. When in 2-players mode, the game is trying to spawn VatPham on the cell that is at most 1 cell apart from two player and the distance from the players to that cell is greater than 2. But there is still some cases when the game can't find any cell that is available to spawn VatPham, so at that turn, there will be no VatPham being spawn.
+2. The DauTron vatpham is intended to make the player 'teleport' through one '#' cell. But I misunderstood, so that the DauTron vatpham will make the player able to move to '#' cell, and that '#' cell won't be colored.
