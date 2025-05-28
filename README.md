@@ -25,7 +25,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-Fist, clone this repo
+First, clone this repo
 
 ```bash
 git clone https://github.com/Coding-Challenge-2025/RobotDaiChien-BE.git
